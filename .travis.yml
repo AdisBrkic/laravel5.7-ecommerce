@@ -1,41 +1,38 @@
 dist: xenial
 language: php
-
 env:
   global:
   - setup=stable
-
 matrix:
   fast_finish: true
   include:
   - php: 7.1
-  - php: 7.1
-    env: setup=lowest
   - php: 7.2
-  - php: 7.2
-    env: setup=lowest
   - php: 7.3
-  - php: 7.3
-    env: setup=lowest
-
 cache:
   directories:
-  - $HOME/.composer/cache
-
+  - "$HOME/.composer/cache"
 services:
 - memcached
 - redis-server
 - mysql
-
 before_install:
 - phpenv config-rm xdebug.ini || true
 - echo "extension = memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 - printf "\n" | pecl install -f redis
 - travis_retry composer self-update
-- mysql -e 'CREATE DATABASE forge;'
-
 install:
-- if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
-- if [[ $setup = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi
-
+- if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction
+  --prefer-stable --no-suggest; fi
 script: vendor/bin/phpunit
+notifications:
+  email: false
+  slack:
+    rooms:
+      secure: rPRSszE+oQ/s5HyVhVO1sBZ2QjItvf44KFJCBXSQYi1cslpbzy7N/hoCchu5xxa4ZiTnJ+yK4UTj89l0yHCUt/0vVlEDAOhSSYbey+ZLjcFsQQf+k7OagG6ZvkCpQ/fzVga4NM7J69d1Q6RHfcVWZhCDmiFOjtK2qu6w3t47cNfOY9LvUd2NF1vEYjMfCa71V4sZjPBxCAJs/nlnXH5AOx/7QmoGKCGCo47zx7gnrWuhY/KISWXF126D/LKgls+sk2XB6n1HZKhKFE2eBHTvrlgdFJ6q72k8IaTcKRcpneH1pda7loGhwaoE8imHB5wkPZN9Q79PrxX6wXNges6oCOoo9U5kPSaO9ymg5hKmAx271jbHRVFxmq85nJHprWZzyoosUfELGAFWtPtWBpqbZUDQPneV+Kv934yc/EDm60m9oMg6lo8c41FuKYTiph9g2aebzUOCzRS9xEZABz3XfljINVwNtRkF5P/nCLB77A5kUDFtPu7z3a+spH0PEN7ard0wLLgGaOiliaXoVQaqSiYmOlUR4Vuzxc87bYN78lKF7WtMMookUm8uRdhMKqI2TzBA7COPosdqMCKiVYsCXJ74GRjFrBV55de9TL8EYytVaA9DMOkKpDYDeznYFLX5LuTwtbZbBOKCo7gpwVES3pCJACKyjKUJ2jCrYRw0nVA=
+    template:
+    - "%{repository}#%{build_number} (%{branch} : %{author}): %{message}"
+    - 'Change view : %{compare_url}'
+    - 'Build details : %{build_url}'
+    on_success: change
+    on_failure: change
