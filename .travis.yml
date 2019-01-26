@@ -33,5 +33,5 @@ notifications:
     template:
     - "%{repository_slug} (%{commit}) : %{message} %{foo} "
     - "Build details: %{build_url}"
-    on_success: change
-    on_failure: change
+    on_success: always
+    on_failure: always
