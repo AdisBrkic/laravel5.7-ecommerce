@@ -29,10 +29,9 @@ notifications:
   email: false
   slack:
     rooms:
-      secure: rPRSszE+oQ/s5HyVhVO1sBZ2QjItvf44KFJCBXSQYi1cslpbzy7N/hoCchu5xxa4ZiTnJ+yK4UTj89l0yHCUt/0vVlEDAOhSSYbey+ZLjcFsQQf+k7OagG6ZvkCpQ/fzVga4NM7J69d1Q6RHfcVWZhCDmiFOjtK2qu6w3t47cNfOY9LvUd2NF1vEYjMfCa71V4sZjPBxCAJs/nlnXH5AOx/7QmoGKCGCo47zx7gnrWuhY/KISWXF126D/LKgls+sk2XB6n1HZKhKFE2eBHTvrlgdFJ6q72k8IaTcKRcpneH1pda7loGhwaoE8imHB5wkPZN9Q79PrxX6wXNges6oCOoo9U5kPSaO9ymg5hKmAx271jbHRVFxmq85nJHprWZzyoosUfELGAFWtPtWBpqbZUDQPneV+Kv934yc/EDm60m9oMg6lo8c41FuKYTiph9g2aebzUOCzRS9xEZABz3XfljINVwNtRkF5P/nCLB77A5kUDFtPu7z3a+spH0PEN7ard0wLLgGaOiliaXoVQaqSiYmOlUR4Vuzxc87bYN78lKF7WtMMookUm8uRdhMKqI2TzBA7COPosdqMCKiVYsCXJ74GRjFrBV55de9TL8EYytVaA9DMOkKpDYDeznYFLX5LuTwtbZbBOKCo7gpwVES3pCJACKyjKUJ2jCrYRw0nVA=
+      secure: BvBX2Vvhui5e2cT9/eIJf8g+owltQHGtV/hSoiKbCOmo9QwOwjXrVWMNmIRq78gBpE4iTUxI2rtaYj45fvwwC0DzglA2F/+wlflSIEpXjosI0wg2ffxmVRamlEwuIH0rKnb/jwFYYNoZ+PydcVX/RHZd+ZbUhYB/EBkKWEiQJZnOgtk/VzbAOw5X5ezZBonXy4NhxjOjLDAfjnGoXqQMGSjvdonhSYj9H/Ga8ZuusgYAhJugtXCknWFzmvtEgWf7u/ltU2kiygccAK6g2r1JSPEVShlLrJ7KODLigxAL+YekP3DLoAXGTEUMH8OyFne+MhutHDHfqvUSG5gf53wWlQsVC3kz2ZEbRhB8i5utD4nWGQ3JrvJTw0alJw+Hlw5tzJKUh0N+2P15+oRE9cF5QDPwaPUjUg9qcCRAckqLqSkX/g4uOv0I23IBTb9vhHXp9C9OlhruT3xUplM426wxcGYUgYZrXYbE2cHa341+7Db2ObqeFSMXcE/YKfBwtlz0Jdb9PgZCkP6GBaRnRp8iaGnCzTr9M8psaHyoHx/g41tDvgTuBEseGFr+xb8hIYmbR/M4BP6HFg3poMM6e9tQq42wlFeg0RlQnbCX1ahCHlvkW3/MccFrjPj2oplGcyKn9IhAKW++zqa6JeeoPF12SI0DnrMz+KxZ8nA6u0L9rDY=
     template:
-    - "%{repository}#%{build_number} (%{branch} : %{author}): %{message}"
-    - 'Change view : %{compare_url}'
-    - 'Build details : %{build_url}'
+    - "%{repository_slug} (%{commit}) : %{message} %{foo} "
+    - "Build details: %{build_url}"
     on_success: change
     on_failure: change
